@@ -1,0 +1,21 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname','priority']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'web.hook'
+receivers:
+- name: 'web.hook'
+  email_configs:
+  - to: 'naman@metadesignsolutions.co.uk'
+    send_resolved: false
+    from: 'namanj71@gmail.com'
+    smarthost: 'smtp.example.com:587'
+    auth_username: 'namanj71@gmail.com'
+    auth_password: 'Thanku71'
+    auth_secret: 'namanj71@gmail.com'
+    auth_identity: 'namanj71@gmail.com'
+

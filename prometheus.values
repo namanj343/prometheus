@@ -1117,24 +1117,20 @@ pushgateway:
 alertmanagerFiles:
   alertmanager.yml:
     global:
-      smtp_from: 'namanj71@gmail.com'
-      smtp_smarthost: 'smtp.gmail.com:587'
-      smtp_auth_username: 'naman'
-      smtp_auth_password: 'Thanku71'
-      smtp_require_tls: true
-
+      resolve_timeout: 1m
     receivers:
       - name: default-receiver
         email_configs:
-        - to: 'naman@metadesignsolutions.co.uk'
-
+        - to: naman@metadesignsolutions.co.uk
+          from: namanj71@gmail.com
+          smarthost: smtp.gmail.com:587 
+          auth_username: "namanj71@gmail.com"
+          auth_identity: "namanj71@gmail.com"
+          auth_password: "Thanku71"
+          send_resolved: true
     route:
-      group_by: ['node']
-      group_wait: 10s
-      group_interval: 5m
       receiver: default-receiver
-      repeat_interval: 3h
-
+ 
 ## Prometheus server ConfigMap entries
 ##
 serverFiles:
@@ -1165,7 +1161,7 @@ serverFiles:
     groups:
      - name: Pod
        rules:
-         - alert: pod service goes down
+         - alert: kube_service_status_load_balancer
            expr: kube_service_status_load_balancer_ingress{namespace="default",service="qhmangento-service"} == 0
            for: 1m
            labels:
