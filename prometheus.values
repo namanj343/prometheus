@@ -1143,7 +1143,7 @@ serverFiles:
   #   - name: Instances
   #     rules:
   #       - alert: pod service goes down
-  #         expr: kube_service_status_load_balancer_ingress{namespace="default",service="qhmangento-service"}==0
+  #         expr: kube_service_status_load_balancer_ingress{service="qhmagento-service"}!=1
   #         for: 1m
   #         labels:
   #           severity: page
